@@ -1,45 +1,59 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  AreaCalculator().shape?.area();
+  Rectangle rect = Rectangle(12.0, 18.0);
+  Area a = Area(rect);
+  a.calculateArea();
+  Shape sq = Square(12.0);
+  Area area = Area(sq);
+  area.calculateArea();
 }
 
-// Open Closed Principle
+// Another example
 abstract class Shape {
-  void area();
+  double calculateArea();
 }
 
-class Circle implements Shape {
-  num? radius;
+class Area {
+  final Shape shape;
+  Area(this.shape);
 
-  @override
-  void area() {
-    print("PI r2");
-  }
-}
-
-class Square implements Shape {
-  num? length;
-
-  @override
-  void area() {
-    print("4 * r");
+  void calculateArea() {
+    print(shape.calculateArea());
   }
 }
 
 class Rectangle implements Shape {
-  num? length;
-  num? height;
+  final double width;
+  final double height;
+
+  Rectangle(this.width, this.height);
 
   @override
-  void area() {
-    print('area is rectangle');
+  double calculateArea() {
+    return width * height;
   }
 }
 
-class AreaCalculator {
-  Shape? shape;
-  calculate() {
-    shape?.area();
+class Square implements Shape {
+  final double side;
+
+  Square(this.side);
+
+  @override
+  double calculateArea() {
+    return side * side;
+  }
+}
+
+class Triangle implements Shape {
+  final double base;
+  final double height;
+
+  Triangle(this.base, this.height);
+
+  @override
+  double calculateArea() {
+    return 0.5 * base * height;
   }
 }
